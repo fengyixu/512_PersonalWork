@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+  "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
+  "transform": [{"calculate": "year(datum.Year)", "as": "Year"}],
+  "selection": {
+    "Year": {
+      "type": "single",
+      "fields": ["City", "Year"],
+      "bind": {
+        "City": {"input": "select", "options" [null, "Seattle", "Lynnwood", "Bothell", "Bellevue", "Shoreline", "Redmond","Renton"]},
+        "Year": {"input": "range", "min": 2013, "max": 2019, "step": 1}
+      }
+    }
+  },
+  "projection":{
+      "type": "mercator"
+  },
+  "mark": "circle",
+  "encoding": {
+    "color": {
+      "condition": {"selection": "CylYr", "field": "Origin", "type": "nominal"},
+      "value": "grey"
+    },
+    "size": {"condition": {"selection": "CylYr", "value": 100}, "value": 50}
+  }
+}
