@@ -1,94 +1,114 @@
 {
-  "layer": [
-    {
-      "mark": {
-        "type": "geoshape",
-        "fill": "gray",
-        "stroke": "#706545",
-        "opacity": 0.2
+    "layer": [
+      {
+        "mark": {
+          "type": "geoshape",
+          "fill": "gray",
+          "stroke": "#706545",
+          "opacity": 0.2
+        },
+        "data": {"url": "https://gist.githubusercontent.com/fengyixu/0b3c26c42ae531d2f36113e869b80fd0/raw/e2bcbb217dff08d40b09ffaf604a7734056a378c/Municipal_Boundaries.json",
+          "format": {
+            "type": "topojson",
+            "feature": "Municipal_Boundaries"
+          }
+        },
+        "projections": {
+          "scale": {"signal": 5
+          }
+        }
       },
-      "data": {"url": "https://gist.githubusercontent.com/fengyixu/0b3c26c42ae531d2f36113e869b80fd0/raw/e2bcbb217dff08d40b09ffaf604a7734056a378c/Municipal_Boundaries.json",
-      "format": {
-        "type": "topojson",
-        "feature": "Municipal_Boundaries"
-      }
-      }
-    },
-    {
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "size": 100
-      },
-      "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
-      "selection": {
-        "select": {
-          "type": "single",
-          "fields": [
-            "Year"
+      {
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 100
+        },
+        "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
+        "selection": {
+          "select": {
+            "type": "single",
+            "fields": [
+              "Year"
+            ],
+            "init": {
+              "Year": 2013
+            },
+            "bind": {
+              "input": "range",
+              "min": 2013,
+              "max": 2019,
+              "step": 1
+            }
+          },
+          "city": {"type": "multi", "fields": ["City"], "nearest": true, "on":                  "click"}
+          },
+        "transform": [
+          {
+            "filter": {
+              "selection": "select"
+            }
+          }
+        ],
+        "encoding": {
+          "latitude": {
+            "field": "Latitude",
+            "type": "quantitative"
+          },
+          "longitude": {
+            "field": "Longitude",
+            "type": "quantitative"
+          },
+          "tooltip": [
+            {
+            "field": "City",
+            "type": "nominal"
+          },
+          {
+            "field":"Increment",
+            "type": "quantitative"
+          }
           ],
-          "init": {
-            "Year": 2013
+          "color": {
+            "condition": {
+            "selection": "city",
+            "value": "red"
+            },
+            "field": "Increment",
+            "type": "quantitative",
+            "legend": {
+              "gradientVerticalMaxLength": 200,
+              "offset": -300
+            }
           },
-          "bind": {
-            "input": "range",
-            "min": 2013,
-            "max": 2019,
-            "step": 1
+          "strokeWidth": {
+            "condition": {
+              "selection": "city", "value": 2
+            },
+            "value": 0
+          },
+          "opacity": {
+            "condition": {
+            "selection": "city",
+            "value": 1
+            },
+            "value": 0.8
+          },
+          "size": {
+            "field": "Listing",
+            "type": "quantitative"
           }
-        },
-        "city": {"type": "multi", "fields": ["City"]}
-      },
-      "transform": [
-        {
-          "filter": {
-            "selection": "select"
-          }
-        }
-      ],
-      "encoding": {
-        "latitude": {
-          "field": "Latitude",
-          "type": "quantitative"
-        },
-        "longitude": {
-          "field": "Longitude",
-          "type": "quantitative"
-        },
-        "tooltip": {
-          "field": "City",
-          "type": "nominal"
-        },
-        "color": {
-          "field": "Increment",
-          "type": "quantitative",
-          "condition": {
-          "selection": "city"
-          },
-          "value": "grey"
-        },
-        "opacity": {
-          "condition": {
-          "selection": "city",
-          "value": 0.8
-          },
-          "value": 0.2
-        },
-        "size": {
-          "field": "Listing",
-          "type": "quantitative"
         }
       }
-    }
-  ],
-  "projection": {
-    "type": "mercator"
-  },
-  "width": 800,
-  "height": 800,
-  "config": {
-    "view": {
-      "stroke": null
+    ],
+    "projection": {
+      "type": "mercator"
+    },
+    "width": 800,
+    "height": 800,
+    "config": {
+      "view": {
+        "stroke": null
+      }
     }
   }
-}
