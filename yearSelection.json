@@ -36,8 +36,7 @@
             "max": 2019,
             "step": 1
           }
-        },
-        "city": {"type": "multi", "fields": ["City"]}
+        }
       },
       "transform": [
         {
@@ -60,21 +59,6 @@
           "type": "nominal"
         },
         "color": {
-          "field": "Increment",
-          "type": "quantitative",
-          "condition": {
-          "selection": "city"
-          },
-          "value": "grey"
-        },
-        "opacity": {
-          "condition": {
-          "selection": "city",
-          "value": 0.8
-          },
-          "value": 0.2
-        },
-        "size": {
           "field": "Listing",
           "type": "quantitative"
         }
