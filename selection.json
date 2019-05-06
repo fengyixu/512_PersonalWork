@@ -1,26 +1,77 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
-  "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
-  "transform": [{"calculate": "year(datum.Year)", "as": "Year"}],
-  "selection": {
-    "CitYr": {
-      "type": "single",
-      "fields": ["City", "Year"],
-      "bind": {
-        "City": {"input": "select", "options" [null, "Seattle", "Lynnwood", "Bothell", "Bellevue", "Shoreline", "Redmond","Renton"]},
-        "Year": {"input": "range", "min": 2013, "max": 2019, "step": 1}
+    "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+    "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
+    "layer": [
+      {
+        "mark": {
+          "type": "geoshape",
+          "fill": "gray",
+          "stroke": "#706545",
+          "opacity": 0.2
+        },
+        "data": {"url": "https://gist.githubusercontent.com/fengyixu/0b3c26c42ae531d2f36113e869b80fd0/raw/e2bcbb217dff08d40b09ffaf604a7734056a378c/Municipal_Boundaries.json",
+        "format": {
+          "type": "topojson",
+          "feature": "Municipal_Boundaries"
+        }
+        }
+  
+      },
+      {
+        "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"
+        },
+        "transform": [
+          {
+            "filter": "datum.Year == \"2018\""
+          }
+        ],
+        "mark": {
+          "type": "circle",
+          "size": 100
+        },
+        "selection": {
+          "city": {"type": "multi", "fields": ["City"]}
+        },
+  
+        "encoding": {
+          "latitude": {
+            "field": "Latitude",
+            "type": "quantitative"
+          },
+          "longitude": {
+            "field": "Longitude",
+            "type": "quantitative"
+          },
+          "tooltip": {
+            "field": "Increment",
+            "type": "nominal"
+          },
+          "color": {
+            "condition": {
+              "selection": "city",
+              "field": "Increment",
+              "type": "quantitative"
+            },
+            "value": "grey"
+          },
+          "opacity": {
+            "condition": {
+              "selection": "city",
+              "value": 0.8
+            },
+            "value": 0.1
+          }
+        }
+      }
+    ],
+    "projection": {
+      "type": "mercator"
+    },
+    "width": 800,
+    "height": 800,
+    "config": {
+      "view": {
+        "stroke": null
       }
     }
-  },
-  "projection":{
-      "type": "mercator"
-  },
-  "mark": "circle",
-  "encoding": {
-    "color": {
-      "condition": {"selection": "CylYr", "field": "Origin", "type": "nominal"},
-      "value": "grey"
-    },
-    "size": {"condition": {"selection": "CitYr", "value": 100}, "value": 50}
   }
-}
