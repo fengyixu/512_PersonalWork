@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Vega Scaffold</title>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="https://vega.github.io/vega/vega.min.js"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+  </body>
+<script type="text/javascript">
+// parse a spec and create a visualization view
+function parse(spec) {
+  vg.parse.spec(spec, function(error, chart) { chart({el:"#vis"}).update(); });
+}
+parse("https://gist.github.com/fengyixu/1590b9c0d00a9aa9e7c0dccee2b11960/raw/6dc4854510bc1fe2711108e82e3425a77642fd9c/bar.vl.json");
+</script>
+</html>

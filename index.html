@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+</head>
+
+<body>  
+  <div id="vis"></div>
+  
+  <script>
+    const spec = "https://gist.github.com/fengyixu/b9b59a9211b0b5a0bf7b73a6f373e8b9/raw/7ba8f530fa9635f44c014fb78e931076104e6059/controlYear.js";
+  	vegaEmbed('#vis', spec)
+    	// result.view provides access to the Vega View API
+      .then(result => console.log(result))
+      .catch(console.warn);
+  </script>
+</body>
