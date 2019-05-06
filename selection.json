@@ -3,7 +3,7 @@
   "data": {"url": "https://gist.githubusercontent.com/fengyixu/e269cfe629e2163e4c30c4d7f13a7b7a/raw/70951e306d19baa988a7447c005ff2a662b23824/gistfile1.txt"},
   "transform": [{"calculate": "year(datum.Year)", "as": "Year"}],
   "selection": {
-    "Year": {
+    "CitYr": {
       "type": "single",
       "fields": ["City", "Year"],
       "bind": {
@@ -21,6 +21,6 @@
       "condition": {"selection": "CylYr", "field": "Origin", "type": "nominal"},
       "value": "grey"
     },
-    "size": {"condition": {"selection": "CylYr", "value": 100}, "value": 50}
+    "size": {"condition": {"selection": "CitYr", "value": 100}, "value": 50}
   }
 }
