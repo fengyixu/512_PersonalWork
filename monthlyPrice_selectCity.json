@@ -1,0 +1,40 @@
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+"description": "A simple map with city housing price information",
+
+  "width": 430,
+  "height": 270,
+  "mark": {
+    "type": "bar"
+  },
+  "data": {"url": "https://raw.githubusercontent.com/yuew03/house_compass/master/dataset/data_set/cityPriceMonthly.json"},
+  "selection": {
+    "Select": {
+      "type": "single",
+      "fields": [
+        "city"
+      ],
+      "init": {
+        "city": "Renton"
+      },
+      "bind": {
+        "input": "select", "options": ["Seattle", "Renton", "Bellevue", "Bothell", "Redmond", "Lynnwood", "Sammamish", "Kirkland", "Shoreline"]
+      }
+    }
+  },
+  "transform": [{"filter": {"selection": "Select"}}],
+  "encoding": {
+    "x": {
+      "field": "month",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "price",
+      "type": "quantitative"
+    },
+    "tooltip": {
+      "field": "price",
+      "type": "quantitative"
+    }
+  }
+}
